@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    android:id="@+id/itemAdvertLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/card_background"
+    android:padding="12dp">
+
+    <ImageView
+        android:id="@+id/ivAdvertItem"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:contentDescription="Advert image"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvAdvertTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="Title"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivAdvertItem"
+        app:layout_constraintTop_toTopOf="@id/ivAdvertItem" />
+
+    <TextView
+        android:id="@+id/tvAdvertCategory"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Category"
+        app:layout_constraintEnd_toEndOf="@id/tvAdvertTitle"
+        app:layout_constraintStart_toStartOf="@id/tvAdvertTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvAdvertTitle" />
+
+    <TextView
+        android:id="@+id/tvAdvertLocation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        app:layout_constraintEnd_toEndOf="@id/tvAdvertTitle"
+        app:layout_constraintStart_toStartOf="@id/tvAdvertTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvAdvertCategory" />
+
+    <TextView
+        android:id="@+id/tvAdvertDateTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Date/time"
+        app:layout_constraintEnd_toEndOf="@id/tvAdvertTitle"
+        app:layout_constraintStart_toStartOf="@id/tvAdvertTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvAdvertLocation" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

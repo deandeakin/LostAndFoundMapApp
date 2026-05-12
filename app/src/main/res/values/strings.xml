@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">LostAndFoundMapApp</string>
+    <string-array name="advert_categories">
+        <item>Pets</item>
+        <item>Electronics</item>
+        <item>Wallets</item>
+        <item>Handbags</item>
+        <item>Sunglasses</item>
+        <item>Backpacks</item>
+        <item>Hats</item>
+        <item>Keys</item>
+        <item>Clothing</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="advert_filter_categories">
+        <item>All</item>
+        <item>Pets</item>
+        <item>Electronics</item>
+        <item>Wallets</item>
+        <item>Handbags</item>
+        <item>Sunglasses</item>
+        <item>Backpacks</item>
+        <item>Hats</item>
+        <item>Keys</item>
+        <item>Clothing</item>
+        <item>Other</item>
+    </string-array>
+</resources>
