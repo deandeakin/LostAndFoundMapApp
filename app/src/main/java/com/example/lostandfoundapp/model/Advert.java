@@ -2,9 +2,9 @@ package com.example.lostandfoundapp.model;
 
 // Class representing one lost or found advert.
 public class Advert {
-    private int id;
-    private String postType, name, phone, description, location, category, imageUri, dateTime;
-    private double latitude, longitude;
+    private final int id;
+    private final String postType, name, phone, description, location, category, imageUri, dateTime;
+    private final double latitude, longitude;
 
     public Advert(int id, String postType, String name, String phone, String description, String location, String category, String imageUri, String dateTime, double latitude, double longitude) {
         this.id = id;

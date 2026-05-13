@@ -137,7 +137,7 @@ public class AddAdvertActivity extends AppCompatActivity {
         imagePickerLauncher.launch(new String[]{"image/*"});
     }
 
-    // Validates the user inputs and saves the record to the DB.
+    // Validates the user inputs and saves the advert, image URI, and coordinates to the DB.
     private void saveAdvert() {
         int selectedPostTypeId = rgPostType.getCheckedRadioButtonId();
 
@@ -180,6 +180,7 @@ public class AddAdvertActivity extends AppCompatActivity {
         }
     }
 
+    // gets the device's current location and stores its coordinates for the advert.
     private void getCurrentLocation() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
@@ -203,6 +204,7 @@ public class AddAdvertActivity extends AppCompatActivity {
                 });
     }
 
+    // Sets up Google Places autocomplete results for the location field.
     private void setupPlaceAutocomplete() {
         placeAutocompleteLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -228,6 +230,7 @@ public class AddAdvertActivity extends AppCompatActivity {
         );
     }
 
+    // Opens Google Places autocomplete screen to select a location.
     private void openPlaceAutocomplete() {
         List<Place.Field> fields = Arrays.asList(
                 Place.Field.ID,
@@ -241,6 +244,7 @@ public class AddAdvertActivity extends AppCompatActivity {
         placeAutocompleteLauncher.launch(intent);
     }
 
+    // Converts coordinates to an address using Geocoder.
     private String getAddressFromLocation(double latitude, double longitude) {
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
 
@@ -261,6 +265,7 @@ public class AddAdvertActivity extends AppCompatActivity {
         return "Current location: " + latitude + ", " + longitude;
     }
 
+    // Handles permission result from the user.
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

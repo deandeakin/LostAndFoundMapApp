@@ -33,13 +33,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private DatabaseHelper databaseHelper;
     private FusedLocationProviderClient fusedLocationClient;
     private EditText etRadius;
-    private Button btnShowNearby;
     private Location currentLocation;
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 200;
 
     // Fallback map location: Melbourne
     private static final LatLng DEFAULT_MAP_LOCATION = new LatLng(-37.8136, 144.9631);
+
+    private static final double DEFAULT_RADIUS_KM = 10.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         etRadius = findViewById(R.id.etRadius);
-        btnShowNearby = findViewById(R.id.btnShowNearby);
+        Button btnShowNearby = findViewById(R.id.btnShowNearby);
+        etRadius.setText(String.valueOf(DEFAULT_RADIUS_KM));
 
         btnShowNearby.setOnClickListener(v -> showNearbyAdverts());
 
@@ -173,9 +175,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             }
         }
 
-        if (firstLocation != null) {
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(firstLocation, 13));
-        }
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(firstLocation, 13));
     }
 
     // Handles permission result from the user.
