@@ -27,6 +27,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COL_CATEGORY = "category";
     private static final String COL_IMAGE_URI = "image_uri";
     private static final String COL_DATE_TIME = "date_time";
+    private static final String COL_LATITUDE = "latitude";
+    private static final String COL_LONGITUDE = "longitude";
 
     public DatabaseHelper(Context context) {super(context, DATABASE_NAME, null, DATABASE_VERSION);}
 
@@ -42,7 +44,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COL_LOCATION + " TEXT NOT NULL, " +
                 COL_CATEGORY + " TEXT NOT NULL, " +
                 COL_IMAGE_URI + " TEXT, " +
-                COL_DATE_TIME + " TEXT NOT NULL" +
+                COL_DATE_TIME + " TEXT NOT NULL, " +
+                COL_LATITUDE + " REAL NOT NULL, " +
+                COL_LONGITUDE + " REAL NOT NULL" +
                 ")";
 
         db.execSQL(createAdvertsTable);
@@ -55,9 +59,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // Inserts a new record into the adverts table. Also adds a timestamp to the record.
-    public boolean insertAdvert(String postType, String name, String phone, String description, String location, String category, String imageUri) {
+    public boolean insertAdvert(String postType, String name, String phone, String description, String location, String category, String imageUri, double latitude, double longitude) {
 
-        SQLiteDatabase db = this.getWritableDatabase();
+    SQLiteDatabase db = this.getWritableDatabase();
         String dateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(new Date());
         ContentValues cv = new ContentValues();
         cv.put(COL_POST_TYPE, postType);
@@ -68,6 +72,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(COL_CATEGORY, category);
         cv.put(COL_IMAGE_URI, imageUri);
         cv.put(COL_DATE_TIME, dateTime);
+        cv.put(COL_LATITUDE, latitude);
+        cv.put(COL_LONGITUDE, longitude);
 
         long result = db.insert(TABLE_ADVERTS, null, cv);
         db.close();
@@ -151,6 +157,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result > 0;
     }
 
+    // Retrieves all adverts for displaying markers on the map.
+    public ArrayList<Advert> getAllAdverts() {
+        ArrayList<Advert> adverts = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_ADVERTS, null, null, null, null, null, COL_DATE_TIME + " DESC");
+
+        if (cursor.moveToFirst()) {
+            do {
+                adverts.add(cursorToAdvert(cursor));
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return adverts;
+    }
+
     // Converts the current DB row into an advert object.
     private Advert cursorToAdvert(Cursor cursor) {
         int id = cursor.getInt(cursor.getColumnIndexOrThrow(COL_ID));
@@ -162,7 +186,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String category = cursor.getString(cursor.getColumnIndexOrThrow(COL_CATEGORY));
         String imageUri = cursor.getString(cursor.getColumnIndexOrThrow(COL_IMAGE_URI));
         String dateTime = cursor.getString(cursor.getColumnIndexOrThrow(COL_DATE_TIME));
+        double latitude = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_LATITUDE));
+        double longitude = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_LONGITUDE));
 
-        return new Advert(id, postType, name, phone, description, location, category, imageUri, dateTime);
+        return new Advert(id, postType, name, phone, description, location, category, imageUri, dateTime, latitude, longitude);
     }
 }

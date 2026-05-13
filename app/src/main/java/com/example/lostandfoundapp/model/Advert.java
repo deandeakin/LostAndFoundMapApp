@@ -4,8 +4,9 @@ package com.example.lostandfoundapp.model;
 public class Advert {
     private int id;
     private String postType, name, phone, description, location, category, imageUri, dateTime;
+    private double latitude, longitude;
 
-    public Advert(int id, String postType, String name, String phone, String description, String location, String category, String imageUri, String dateTime) {
+    public Advert(int id, String postType, String name, String phone, String description, String location, String category, String imageUri, String dateTime, double latitude, double longitude) {
         this.id = id;
         this.postType = postType;
         this.name = name;
@@ -15,6 +16,8 @@ public class Advert {
         this.category = category;
         this.imageUri = imageUri;
         this.dateTime = dateTime;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public int getId() {
@@ -51,6 +54,14 @@ public class Advert {
 
     public String getDateTime() {
         return dateTime;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
     }
 
     // A user-friendly title for the advert.

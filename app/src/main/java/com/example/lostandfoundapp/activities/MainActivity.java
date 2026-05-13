@@ -10,7 +10,7 @@ import com.example.lostandfoundapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnCreateAdvert, btnShowItems;
+    private Button btnCreateAdvert, btnShowItems, btnShowOnMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnCreateAdvert = findViewById(R.id.btnCreateAdvert);
         btnShowItems = findViewById(R.id.btnShowItems);
+        btnShowOnMap = findViewById(R.id.btnShowOnMap);
 
         btnCreateAdvert.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, AddAdvertActivity.class);
@@ -27,6 +28,11 @@ public class MainActivity extends AppCompatActivity {
 
         btnShowItems.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, ListAdvertActivity.class);
+            startActivity(intent);
+        });
+
+        btnShowOnMap.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, MapActivity.class);
             startActivity(intent);
         });
     }
